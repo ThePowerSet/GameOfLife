@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Life</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Micro Life</h1>
+            <p class="subtitle">Pick one, press play, or create your own.</p>
+        </header>
+
+        <!-- Info Dropdown -->
+        <div class="info-section">
+            <select id="infoDropdown" class="info-dropdown" aria-label="Pattern Information">
+                <option value="">📚 Learn About Patterns</option>
+                <option value="still-life">Still Lifes</option>
+                <option value="oscillators">Oscillators</option>
+                <option value="spaceships">Spaceships</option>
+                <option value="guns">Guns & Methuselahs</option>
+            </select>
+        </div>
+
+        <!-- Pattern Controls -->
+        <div class="pattern-controls">
+            <button id="generatePatternBtn" class="btn btn-primary">Generate Pattern</button>
+            <button id="randomBtn" class="btn btn-secondary">Random</button>
+            <div class="pattern-label">
+                <span>Pattern: </span>
+                <span id="currentPatternName">Empty</span>
+            </div>
+        </div>
+
+        <!-- Info Box (Hidden by default) -->
+        <div id="infoBox" class="info-box hidden"></div>
+
+        <!-- Canvas -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" class="game-canvas"></canvas>
+        </div>
+
+        <!-- Simulation Controls -->
+        <div class="simulation-controls">
+            <button id="playBtn" class="btn btn-action">Play</button>
+            <button id="stepBtn" class="btn btn-action">Step</button>
+            <button id="restartBtn" class="btn btn-action">Restart</button>
+            <button id="clearBtn" class="btn btn-action">Clear</button>
+        </div>
+
+        <!-- Speed Control & Stats -->
+        <div class="speed-stats">
+            <div class="speed-control">
+                <label for="speedSlider">Speed:</label>
+                <input 
+                    id="speedSlider" 
+                    type="range" 
+                    min="10" 
+                    max="500" 
+                    value="150" 
+                    class="slider"
+                    aria-label="Simulation speed"
+                >
+            </div>
+            <div class="generation-counter">
+                Generation: <span id="generationCount">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="patterns.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
