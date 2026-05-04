@@ -382,8 +382,8 @@ body {
         max-height: 120px;
     }
 
-    .controls-row {
-        flex-wrap: wrap;
+    .controls-row-hard {
+        transform: translateX(-30px);
     }
     
     .pattern-label {
@@ -474,6 +474,45 @@ body {
 }
 
 .modal-content h2, .modal-content h3 {
+    color: var(--btn-primary);
+    margin-bottom: 15px;
+}
+
+.modal-content h3 {
+    margin-top: 20px;
+}
+
+.modal-content p, .modal-content ul {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.modal-content ul {
+    padding-left: 20px;
+}
+
+.modal-content li {
+    margin-bottom: 8px;
+}
+
+.close-btn {
+    color: var(--text-secondary);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--btn-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+ontent h2, .modal-content h3 {
     color: var(--btn-primary);
     margin-bottom: 15px;
 }
