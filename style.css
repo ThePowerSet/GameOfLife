@@ -382,8 +382,24 @@ body {
         max-height: 120px;
     }
 
+    .desktop-controls {
+        width: 100% !important;
+    }
+
     .controls-row-hard {
-        transform: translateX(-30px);
+        flex-wrap: wrap;
+        width: 100% !important;
+        justify-content: center;
+        transform: none !important;
+    }
+    
+    .info-dropdown, #generatePatternBtn {
+        width: calc(100% - 125px) !important;
+        min-width: 150px;
+    }
+
+    #rulesBtn, #randomBtn {
+        width: 110px !important;
     }
     
     .pattern-label {
