@@ -5,6 +5,23 @@
 
 const PATTERNS = [
     {
+        name: "The Power Set Pyramid",
+        description: "A beautiful self-similar fractal pyramid with recursive structure.",
+        cells: [
+            [1, 7],
+            [2, 6], [2, 7], [2, 8],
+            [4, 5], [4, 9],
+            [5, 4], [5, 10],
+            [6, 2], [6, 4], [6, 5], [6, 6], [6, 8], [6, 9], [6, 10], [6, 12],
+            [7, 1], [7, 2], [7, 12], [7, 13],
+            [8, 2], [8, 4], [8, 5], [8, 6], [8, 8], [8, 9], [8, 10], [8, 12],
+            [9, 4], [9, 10],
+            [10, 5], [10, 9],
+            [12, 6], [12, 7], [12, 8],
+            [13, 7]
+        ]
+    },
+    {
         name: "Glider",
         description: "A small pattern that travels diagonally across the grid.",
         cells: [
@@ -122,23 +139,6 @@ const PATTERNS = [
             [2, 1],
             [2, 3],
             [3, 2]
-        ]
-    },
-    {
-        name: "The Power Set Pyramid",
-        description: "A beautiful self-similar fractal pyramid with recursive structure.",
-        cells: [
-            [1, 7],
-            [2, 6], [2, 7], [2, 8],
-            [4, 5], [4, 9],
-            [5, 4], [5, 10],
-            [6, 2], [6, 4], [6, 5], [6, 6], [6, 8], [6, 9], [6, 10], [6, 12],
-            [7, 1], [7, 2], [7, 12], [7, 13],
-            [8, 2], [8, 4], [8, 5], [8, 6], [8, 8], [8, 9], [8, 10], [8, 12],
-            [9, 4], [9, 10],
-            [10, 5], [10, 9],
-            [12, 6], [12, 7], [12, 8],
-            [13, 7]
         ]
     }
 ];

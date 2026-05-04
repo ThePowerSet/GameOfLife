@@ -35,7 +35,7 @@ function init() {
     setupCanvasSize();
     createEmptyGrid();
     attachEventListeners();
-    render();
+    loadNextPattern();
 }
 
 function setupCanvasSize() {
