@@ -150,18 +150,18 @@ const PATTERNS = [
 const PATTERNS_INFO = {
     "still-life": {
         title: "Still Lifes",
-        content: `Still lifes are patterns that don't change at all. They remain stable forever. Examples include the Block (a 2x2 square), the Loaf, and the Tub. These are the simplest stable structures in Conway's Game of Life.`
+        content: `Still lifes are patterns that don't change at all. They remain stable forever. Examples include the <span style="color: var(--cell-alive); font-weight: bold;">Block</span> (a 2x2 square), the <span style="color: var(--cell-alive); font-weight: bold;">Loaf</span>, and the <span style="color: var(--cell-alive); font-weight: bold;">Tub</span>. These are the simplest stable structures in Conway's Game of Life.`
     },
     "oscillators": {
         title: "Oscillators",
-        content: `Oscillators are patterns that repeat themselves after a certain number of generations, called the period. The Blinker has period 2 (flips back and forth every generation). The Pulsar has period 3, creating a beautiful symmetrical pattern. Oscillators are fundamental building blocks in Game of Life.`
+        content: `Oscillators are patterns that repeat themselves after a certain number of generations, called the period. The <span style="color: var(--cell-alive); font-weight: bold;">Blinker</span> has period 2 (flips back and forth every generation). The <span style="color: var(--cell-alive); font-weight: bold;">Pulsar</span> has period 3, creating a beautiful symmetrical pattern. Oscillators are fundamental building blocks in Game of Life.`
     },
     "spaceships": {
         title: "Spaceships",
-        content: `Spaceships are patterns that travel across the grid while maintaining their shape. The Glider is the simplest and most famous spaceship, moving diagonally. Spaceships are important for transferring signals and information across the grid in complex patterns.`
+        content: `Spaceships are patterns that travel across the grid while maintaining their shape. The <span style="color: var(--cell-alive); font-weight: bold;">Glider</span> is the simplest and most famous spaceship, moving diagonally. Spaceships are important for transferring signals and information across the grid in complex patterns.`
     },
     "guns": {
         title: "Guns & Methuselahs",
-        content: `Guns are devices that emit spaceships (typically gliders) in a regular pattern. The Gosper Glider Gun is the first-ever discovered gun. Methuselahs are small patterns that take a very long time to reach a stable state, like the Acorn which takes 5,206 generations to settle.`
+        content: `Guns are devices that emit spaceships (typically gliders) in a regular pattern. The <span style="color: var(--cell-alive); font-weight: bold;">Gosper Glider Gun</span> is the first-ever discovered gun. Methuselahs are small patterns that take a very long time to reach a stable state, like the <span style="color: var(--cell-alive); font-weight: bold;">Acorn</span> which takes 5,206 generations to settle.`
     }
 };

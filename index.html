@@ -14,25 +14,30 @@
             <p class="subtitle">Pick one, press play, or create your own.</p>
         </header>
 
-        <!-- Info Dropdown & Rules -->
-        <div class="info-section" style="display: flex; justify-content: center; gap: 15px; align-items: center;">
-            <select id="infoDropdown" class="info-dropdown" aria-label="Pattern Information">
-                <option value="">Learn About Patterns</option>
-                <option value="still-life">Still Lifes</option>
-                <option value="oscillators">Oscillators</option>
-                <option value="spaceships">Spaceships</option>
-                <option value="guns">Guns & Methuselahs</option>
-            </select>
-            <button id="rulesBtn" class="btn btn-secondary">Rules</button>
-        </div>
+        <!-- Controls Area -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 25px;">
+            <!-- Row 1: Dropdown & Rules -->
+            <div style="display: flex; gap: 15px; width: fit-content;">
+                <select id="infoDropdown" class="info-dropdown" aria-label="Pattern Information" style="width: 260px;">
+                    <option value="">Learn About Patterns</option>
+                    <option value="still-life">Still Lifes</option>
+                    <option value="oscillators">Oscillators</option>
+                    <option value="spaceships">Spaceships</option>
+                    <option value="guns">Guns & Methuselahs</option>
+                </select>
+                <button id="rulesBtn" class="btn btn-secondary" style="width: 110px;">Rules</button>
+            </div>
 
-        <!-- Pattern Controls -->
-        <div class="pattern-controls">
-            <button id="generatePatternBtn" class="btn btn-primary">Generate Pattern</button>
-            <button id="randomBtn" class="btn btn-secondary">Random</button>
-            <div class="pattern-label">
-                <span>Pattern: </span>
-                <span id="currentPatternName">Empty</span>
+            <!-- Row 2: Generate & Random -->
+            <div style="display: flex; gap: 15px; width: fit-content; position: relative;">
+                <button id="generatePatternBtn" class="btn btn-primary" style="width: 260px;">Generate Pattern</button>
+                <button id="randomBtn" class="btn btn-secondary" style="width: 110px;">Random</button>
+                
+                <!-- Pattern Label outside the flow -->
+                <div class="pattern-label" style="position: absolute; left: 100%; margin-left: 15px; top: 50%; transform: translateY(-50%); white-space: nowrap;">
+                    <span>Pattern: </span>
+                    <span id="currentPatternName">Empty</span>
+                </div>
             </div>
         </div>
 
@@ -66,6 +71,19 @@
                     aria-label="Simulation speed"
                 >
             </div>
+            <div class="zoom-control">
+                <label for="zoomSlider">Zoom:</label>
+                <input 
+                    id="zoomSlider" 
+                    type="range" 
+                    min="0.1" 
+                    max="2.5" 
+                    step="0.05"
+                    value="0.5" 
+                    class="slider"
+                    aria-label="Grid zoom"
+                >
+            </div>
             <div class="generation-counter">
                 Generation: <span id="generationCount">0</span>
             </div>
@@ -74,23 +92,25 @@
 
     <!-- Rules Modal -->
     <div id="rulesModal" class="modal hidden">
-        <div class="modal-content">
+        <div class="modal-content rules-modal-content">
             <span class="close-btn" id="closeRulesBtn">&times;</span>
-            <h2>Explanation</h2>
-            <p>The Game of Life is not your typical computer game. It is a cellular automaton, and was invented by Cambridge mathematician John Conway.</p>
-            <p>This game became widely known when it was mentioned in an article published by Scientific American in 1970. It consists of a grid of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game.</p>
-            
-            <h3>Game of Life Rules</h3>
-            <p><strong>For a space that is populated:</strong></p>
-            <ul>
-                <li>Each cell with one or no neighbors dies, as if by solitude.</li>
-                <li>Each cell with four or more neighbors dies, as if by overpopulation.</li>
-                <li>Each cell with two or three neighbors survives.</li>
-            </ul>
-            <p><strong>For a space that is empty or unpopulated:</strong></p>
-            <ul>
-                <li>Each cell with three neighbors becomes populated.</li>
-            </ul>
+            <div class="rules-layout">
+                <div class="rules-text">
+                    <h2>Explanation</h2>
+                    <p>The Game of Life is a cellular automaton devised by John Horton Conway in 1970. It is a zero-player game, meaning its evolution is determined by its initial state.</p>
+                    
+                    <h3>Rules</h3>
+                    <ul>
+                        <li>Any live cell with fewer than two live neighbours dies (underpopulation).</li>
+                        <li>Any live cell with two or three live neighbours lives on.</li>
+                        <li>Any live cell with more than three live neighbours dies (overpopulation).</li>
+                        <li>Any dead cell with exactly three live neighbours becomes a live cell (reproduction).</li>
+                    </ul>
+                </div>
+                <div class="rules-image">
+                    <img src="examples/examples.png" alt="Game of Life Examples">
+                </div>
+            </div>
         </div>
     </div>
 

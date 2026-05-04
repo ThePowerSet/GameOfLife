@@ -381,6 +381,19 @@ body {
         font-size: 12px;
         max-height: 120px;
     }
+
+    .controls-row {
+        flex-wrap: wrap;
+    }
+    
+    .pattern-label {
+        position: static !important;
+        transform: none !important;
+        text-align: center;
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0 !important;
+    }
 }
 
 /* Modal Styling */
@@ -413,6 +426,51 @@ body {
     color: var(--text-primary);
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.rules-modal-content {
+    max-width: 800px;
+}
+
+.rules-layout {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.rules-text {
+    flex: 1;
+}
+
+.rules-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.rules-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .rules-layout {
+        flex-direction: column;
+    }
+}
+
+.zoom-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.zoom-control label {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .modal-content h2, .modal-content h3 {

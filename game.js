@@ -9,8 +9,8 @@
 
 let canvas, ctx;
 let currentGrid, nextGrid, initialGrid;
-let rows = 50, cols = 50;
-let cellSize = 12;
+let rows = 150, cols = 150; // Increased base grid size
+let cellSize = 6; // Smaller cell size means more cells in the same area
 let isRunning = false;
 let generation = 0;
 let speed = 150;
@@ -19,7 +19,7 @@ let isDrawing = false;
 let hasDragged = false;
 let currentPatternIndex = 0;
 let currentPatternName = "Empty";
-let zoomLevel = 1.0;
+let zoomLevel = 0.5; // Start more zoomed out
 let offsetX = 0, offsetY = 0;
 
 // ============================================================================
@@ -43,12 +43,33 @@ function setupCanvasSize() {
     const maxWidth = Math.min(window.innerWidth - 40, 800);
     const maxHeight = window.innerHeight * 0.5;
 
-    canvas.width = maxWidth;
-    canvas.height = Math.min(maxHeight, maxWidth * 0.75);
+    const displayWidth = maxWidth;
+    const displayHeight = Math.min(maxHeight, maxWidth * 0.75);
 
-    // Recalculate grid dimensions based on canvas size
-    rows = Math.floor(canvas.height / cellSize);
-    cols = Math.floor(canvas.width / cellSize);
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = displayWidth * dpr;
+    canvas.height = displayHeight * dpr;
+    canvas.style.width = `${displayWidth}px`;
+    canvas.style.height = `${displayHeight}px`;
+
+    ctx.scale(dpr, dpr);
+
+    // Fixed large world size
+    rows = 150;
+    cols = 200;
+
+    // Calculate minimum zoom so the grid fits exactly inside the canvas without empty bounds if possible
+    const minZoomX = displayWidth / (cols * cellSize);
+    const minZoomY = displayHeight / (rows * cellSize);
+    const minZoom = Math.max(minZoomX, minZoomY); // use max so the grid always covers the canvas
+    
+    const zoomSlider = document.getElementById('zoomSlider');
+    zoomSlider.min = minZoom.toFixed(2);
+    
+    if (zoomLevel < minZoom) {
+        zoomLevel = minZoom;
+        zoomSlider.value = zoomLevel;
+    }
 }
 
 function createEmptyGrid() {
@@ -221,14 +242,35 @@ function saveInitialState() {
 // ============================================================================
 
 function render() {
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    const gridW = cols * cellSize;
+    const gridH = rows * cellSize;
+
     ctx.fillStyle = '#07110c';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.save();
+    // Center the zoom
+    ctx.translate(w / 2, h / 2);
+    ctx.scale(zoomLevel, zoomLevel);
+    
+    // Apply panning offset
+    ctx.translate(offsetX, offsetY);
+
+    // Center the grid itself
+    ctx.translate(-gridW / 2, -gridH / 2);
 
     drawGrid();
     drawCells();
+    
+    ctx.restore();
 }
 
 function drawGrid() {
+    const gridW = cols * cellSize;
+    const gridH = rows * cellSize;
+
     ctx.strokeStyle = 'rgba(124, 255, 138, 0.12)';
     ctx.lineWidth = 1;
 
@@ -237,7 +279,7 @@ function drawGrid() {
         const x = c * cellSize;
         ctx.beginPath();
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+        ctx.lineTo(x, gridH);
         ctx.stroke();
     }
 
@@ -246,7 +288,7 @@ function drawGrid() {
         const y = r * cellSize;
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
+        ctx.lineTo(gridW, y);
         ctx.stroke();
     }
 }
@@ -256,7 +298,8 @@ function drawCells() {
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             if (currentGrid[r][c] === 1) {
-                ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+                // Shrink cell slightly to make grid pop more, enhancing resolution perception
+                ctx.fillRect(c * cellSize + 1, r * cellSize + 1, cellSize - 2, cellSize - 2);
             }
         }
     }
@@ -268,8 +311,25 @@ function drawCells() {
 
 function getCellFromPointerEvent(event) {
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
+
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    const gridW = cols * cellSize;
+    const gridH = rows * cellSize;
+
+    // Inverse transform for zoom and center
+    x = x - w / 2;
+    y = y - h / 2;
+    x = x / zoomLevel;
+    y = y / zoomLevel;
+    
+    x -= offsetX;
+    y -= offsetY;
+
+    x = x + gridW / 2;
+    y = y + gridH / 2;
 
     const col = Math.floor(x / cellSize);
     const row = Math.floor(y / cellSize);
@@ -343,6 +403,11 @@ function updateSpeed() {
     speed = parseInt(document.getElementById('speedSlider').value);
 }
 
+function updateZoom() {
+    zoomLevel = parseFloat(document.getElementById('zoomSlider').value);
+    render();
+}
+
 // ============================================================================
 // EVENT LISTENERS
 // ============================================================================
@@ -376,8 +441,9 @@ function attachEventListeners() {
         }
     });
 
-    // Speed control
+    // Sliders
     document.getElementById('speedSlider').addEventListener('input', updateSpeed);
+    document.getElementById('zoomSlider').addEventListener('input', updateZoom);
 
     // Canvas interaction
     canvas.addEventListener('pointerdown', handlePointerDown);
