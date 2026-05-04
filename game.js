@@ -362,7 +362,21 @@ function attachEventListeners() {
     document.getElementById('generatePatternBtn').addEventListener('click', loadNextPattern);
     document.getElementById('randomBtn').addEventListener('click', loadRandomPattern);
 
-    // Speed slider
+    // Rules Modal controls
+    const rulesModal = document.getElementById('rulesModal');
+    document.getElementById('rulesBtn').addEventListener('click', () => {
+        rulesModal.classList.remove('hidden');
+    });
+    document.getElementById('closeRulesBtn').addEventListener('click', () => {
+        rulesModal.classList.add('hidden');
+    });
+    window.addEventListener('click', (event) => {
+        if (event.target === rulesModal) {
+            rulesModal.classList.add('hidden');
+        }
+    });
+
+    // Speed control
     document.getElementById('speedSlider').addEventListener('input', updateSpeed);
 
     // Canvas interaction
