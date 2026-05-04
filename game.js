@@ -19,7 +19,7 @@ let isDrawing = false;
 let hasDragged = false;
 let currentPatternIndex = 0;
 let currentPatternName = "Empty";
-let zoomLevel = 0.5; // Start more zoomed out
+let zoomLevel = 2.0; // Start more zoomed out
 let offsetX = 0, offsetY = 0;
 
 // ============================================================================
