@@ -520,6 +520,7 @@ body {
     position: absolute;
     right: 20px;
     top: 15px;
+    z-index: 10;
 }
 
 .close-btn:hover,
@@ -528,42 +529,26 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
-ontent h2, .modal-content h3 {
-    color: var(--btn-primary);
-    margin-bottom: 15px;
-}
 
-.modal-content h3 {
+.mobile-close-btn {
+    display: none;
+    width: 100%;
     margin-top: 20px;
 }
 
-.modal-content p, .modal-content ul {
-    margin-bottom: 15px;
-    color: var(--text-secondary);
-}
+@media (max-width: 768px) {
+    .rules-layout {
+        flex-direction: column;
+    }
+    
+    .mobile-close-btn {
+        display: block;
+    }
 
-.modal-content ul {
-    padding-left: 20px;
-}
-
-.modal-content li {
-    margin-bottom: 8px;
-}
-
-.close-btn {
-    color: var(--text-secondary);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 15px;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: var(--btn-primary);
-    text-decoration: none;
-    cursor: pointer;
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
 }

@@ -435,6 +435,9 @@ function attachEventListeners() {
     document.getElementById('closeRulesBtn').addEventListener('click', () => {
         rulesModal.classList.add('hidden');
     });
+    document.getElementById('mobileCloseRulesBtn').addEventListener('click', () => {
+        rulesModal.classList.add('hidden');
+    });
     window.addEventListener('click', (event) => {
         if (event.target === rulesModal) {
             rulesModal.classList.add('hidden');
